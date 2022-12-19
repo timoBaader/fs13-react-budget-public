@@ -4,14 +4,19 @@ import "./App.css";
 import IncomeExpenseHandler from "./components/IncomeExpenseHandler";
 import Balance from "./components/Balance";
 import Savings from "./components/Savings";
+import Account from "./interfaces/Account";
 
 function App() {
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState<Account>({
     income: 0,
     expense: 0,
     savings: 0,
     balance: 0,
   });
+
+  function handleChange(account: Account): void {
+    setAccount(account);
+  }
 
   return (
     <div className="App">
@@ -26,7 +31,7 @@ function App() {
         account={account}
       ></IncomeExpenseHandler>
       <Balance setAccount={setAccount} account={account}></Balance>
-      <Savings setAccount={setAccount} account={account}></Savings>
+      <Savings handleChange={handleChange} account={account}></Savings>
     </div>
   );
 }
