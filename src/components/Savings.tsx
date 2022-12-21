@@ -1,12 +1,10 @@
-import React, { Dispatch, useState } from "react";
+import React, { useState } from "react";
 
-import Account from "../interfaces/Account"
 import AccountProp from "../interfaces/AccountProp";
 
-const Savings = (props: AccountProp) => {
+const Savings: React.FC<AccountProp> = ({account}: AccountProp ) => {
   const [target, setTarget] = useState(0);
-  const {account} = props;
-  const {handleChange} = props;
+
 
   return (
     <div>

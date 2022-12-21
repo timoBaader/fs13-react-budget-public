@@ -1,14 +1,18 @@
 import { useState } from "react";
+import AccountStateProp from "../interfaces/AccountStateProp";
 
-const Balance = ({ setAccount, account }) => {
+const Balance = (props: AccountStateProp) => {
   const [transfer, setTransfer] = useState(0);
+  const {account} = props;
+  const {setAccount} = props;
+
   const handleSavings = () => {
     if (account.income - account.expense - transfer < 0) {
       console.log("Insufficient funds");
     } else {
       setAccount({
         ...account,
-        savings: transfer,
+        savings: account.savings + transfer,
         income: account.income - transfer,
       });
     }

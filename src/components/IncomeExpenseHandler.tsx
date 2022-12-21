@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const IncomeExpenseHandler = ({ setAccount, account, type }) => {
+import IncomeExpenseProp from "../interfaces/IncomeExpenseProp";
+
+const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) => {
   const [data, setData] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (type === "income")
       setAccount({ ...account, income: account.income + data });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./App.css";
 import IncomeExpenseHandler from "./components/IncomeExpenseHandler";
@@ -14,10 +14,6 @@ function App() {
     balance: 0,
   });
 
-  function handleChange(account: Account): void {
-    setAccount(account);
-  }
-
   return (
     <div className="App">
       <IncomeExpenseHandler
@@ -31,7 +27,7 @@ function App() {
         account={account}
       ></IncomeExpenseHandler>
       <Balance setAccount={setAccount} account={account}></Balance>
-      <Savings handleChange={handleChange} account={account}></Savings>
+      <Savings account={account}></Savings>
     </div>
   );
 }
