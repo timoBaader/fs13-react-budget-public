@@ -1,18 +1,34 @@
 import { useState } from "react";
 import TextField from '@mui/material/TextField';
 
+import IncomeExpenseArray from "../interfaces/IncomeExpenseArray";
 import IncomeExpenseProp from "../interfaces/IncomeExpenseProp";
 
 const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) => {
-  const [data, setData] = useState(0);
-  const [value, setValue] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState("");
+  const [label, setLabel] = useState("missing Label")
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    if (type === "income")
-      setAccount({ ...account, income: account.income + data });
+    const element: IncomeExpenseArray = {
+      date: date,
+      amount: amount,
+      label: label
+    }
+    if (type === "income"){
+      console.log("INCOME")
+      setAccount({ ...account, income: [...account.income, element ] });
+      return;
+    }
     if (type === "expense")
-      setAccount({ ...account, expense: account.expense + data });
+    console.log("expense");
+      if(account.balance - amount < 0) {
+        console.log("insufficient funds")
+        return;
+      }else {
+      setAccount({ ...account, expense: [...account.expense, element ] });
+    }
   };
 
   return (
@@ -22,20 +38,31 @@ const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) =
         type="text"
         id={type}
         name={type}
-        value={data}
-        onChange={(e) => setData(parseInt(e.target.value))}
+        value={amount}
+        onChange={(e) => setAmount(parseInt(e.target.value))}
       />
     <TextField
         id="date"
         label="date"
         type="date"
         defaultValue="2017-05-24"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setDate(e.target.value)}
         sx={{ width: 220 }}
         InputLabelProps={{
           shrink: true,
         }}
       />
+      <TextField
+        id="label"
+        label="info"
+        type="text"
+        onChange={(e) => setLabel(e.target.value)}
+        sx={{ width: 220 }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+
       <button type="submit">Add {type}</button>
     </form>
   );

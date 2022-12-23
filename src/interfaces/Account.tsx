@@ -1,6 +1,8 @@
+import IncomeExpenseArray from "./IncomeExpenseArray";
+
 interface Account {
-    income: number,
-    expense: number,
+    income: Array<IncomeExpenseArray>,
+    expense: Array<IncomeExpenseArray>,
     savings: number,
     balance: number,
 }

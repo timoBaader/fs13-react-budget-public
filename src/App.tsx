@@ -7,12 +7,19 @@ import Savings from "./components/Savings";
 import Account from "./interfaces/Account";
 
 function App() {
+
   const [account, setAccount] = useState<Account>({
-    income: 0,
-    expense: 0,
+    income: [],
+    expense: [],
     savings: 0,
     balance: 0,
   });
+
+  // const calcBalance = (): number => {
+  //   const balance = account.income.reduce((result, current) => result + current.amount, 0) - account.expense.reduce((result, current) => result + current.amount, 0)
+  //   console.log(balance);
+  //   return balance
+  // }
 
   return (
     <div className="App">
