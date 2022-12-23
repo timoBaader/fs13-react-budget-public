@@ -2,9 +2,10 @@ import { useState } from "react";
 import TextField from '@mui/material/TextField';
 
 import IncomeExpenseArray from "../interfaces/IncomeExpenseArray";
-import IncomeExpenseProp from "../interfaces/IncomeExpenseProp";
+import IncomeExpenseProps from "../interfaces/IncomeExpenseProps";
+import currentDate from "./currentDate";
 
-const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) => {
+const IncomeExpenseHandler = ({ setAccount, account, type, balance}: IncomeExpenseProps) => {
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState("");
   const [label, setLabel] = useState("missing Label")
@@ -16,18 +17,19 @@ const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) =
       amount: amount,
       label: label
     }
+    if(!date) element.date = currentDate();
     if (type === "income"){
       console.log("INCOME")
-      setAccount({ ...account, income: [...account.income, element ] });
+      setAccount({ ...account, income: [...account.income, element]});
       return;
     }
     if (type === "expense")
     console.log("expense");
-      if(account.balance - amount < 0) {
+      if(balance - amount < 0) {
         console.log("insufficient funds")
         return;
       }else {
-      setAccount({ ...account, expense: [...account.expense, element ] });
+      setAccount({ ...account, expense: [...account.expense, element]});
     }
   };
 
@@ -45,7 +47,6 @@ const IncomeExpenseHandler = ({ setAccount, account, type}: IncomeExpenseProp) =
         id="date"
         label="date"
         type="date"
-        defaultValue="2017-05-24"
         onChange={(e) => setDate(e.target.value)}
         sx={{ width: 220 }}
         InputLabelProps={{

@@ -1,8 +1,10 @@
 import Account from "./Account";
 
-interface AccountStateProp {
+interface IncomeExpenseProps {
     account: Account;
     setAccount: React.Dispatch<React.SetStateAction<Account>>
+    type: string
+    balance:  number
 }
 
-export default AccountStateProp;
+export default IncomeExpenseProps;
